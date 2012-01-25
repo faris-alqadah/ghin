@@ -1,0 +1,139 @@
+GHIN stands for (Game-theoretic framework for Heterogeneous Information Network clustering). The program is an implementation of the GHIN framework described in "A game theoretic framework for heterogenous information network clustering" (KDD 2011) 
+
+To see synopsis of the program run ./bin/ghin
+
+
+REQUIRED ARGUMENTS:
+-i <inputFile>:
+	path to the input file (see below for input file format and description)
+-w <weight of zeros> 
+	a real number >= 0.0. Refer to GHIN paper and specific reward functions for more details.
+-reward <{1,2}>
+	select the reward function:
+		1- the simple satisfaction reward function
+		2- expected satisfaction (hypergeometric) reward function
+	refer to paper for details.	
+OPTINAL ARGUMENTS:
+-tiring 
+      flag specifying to use the tiring party-goers option as described in the paper. Currently
+      the tiring function is hard-coded as 1/(x^(3/2))
+-o <filename>:
+	this tells the program to output the clusters to the specified file
+	two files will be generated
+	filename.concepts and filename.concepts.names
+	the first file only contains the bi-clusters as integer indices
+	filename.concepts.names contains the bi-clusters with the actual names of objects
+-prog
+	set this option if you would like view progress of the algorithm
+	
+DEFAULTS:
+	No defaults, be sure to specify all required arguments.
+	
+	
+
+INPUT FILE FORMAT:
+
+The input file should follow this strict format:
+<num_domains>
+<num_contexts>
+<name_of_domain_1>
+<path_to_name_file_domain_1>
+.
+.
+.
+<name_of_domain_n>
+<path_to_name_file_domain_n>
+<name_of_domain_i> -- <name_of_domain_j>
+<path_to_fimi_file_of_context_i_j>
+.
+.
+.
+<name_of_domain_s> -- <name_of_domain_t>	
+<path_to_fimi_file_of_context_s_t>
+
+NAME FILE FORMAT:
+each object name should be listed on a seperate line
+
+FIMI FILE FORMAT:
+This is a file format to represent a sparse binary matrix
+Each line of the file corresponds to the (line_num+1)th row
+On each are space seperated integers ,j, indicating the the (j+1)th column contains a one.
+
+For example a 3 x 5 binary matrix wtih a single one at the (1,1) position should have
+3 lines and the single entry '0' as the first character.
+
+An example file is displayed below as well!
+
+EXAMPLE INPUT FILE:
+2
+1
+nums
+/Users/alqadaf/Research/Data/toy/num.names
+atts
+/Users/alqadaf/Research/Data/toy/atts.names
+nums--atts
+/Users/alqadaf/Research/Data/toy/num_atts.fimi
+
+
+So this input file specifies 2 domains and a single context.
+The first domain is called 'nums' and the second is 'atts'.
+The context nums--atts consists of the domains 'nums' and 'atts' and is represented by the fimi file
+'num_atts.fimi'. Since 'nums' is the first domains the rows of 'num_atts.fimi' correspond to the 'nums' domain
+and columns correspond to the 'atts' domain.
+
+Here are examples of the file. They are derived from the sample context at the wikipedia entry on Formal Concept Analysis
+at: http://en.wikipedia.org/wiki/Formal_concept_analysis
+
+num.names:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+atts.names:
+
+composite
+even
+odd
+prime
+square
+
+num_atts.fimi:
+2 4
+1 3
+2 3
+0 1 4
+2 3
+0 1
+2 3
+0 1
+0 2 4
+0 1
+###
+
+Note: notice the ### at the end of the FIMI file. Add this to the end of the file to denote the end of the FIMI file.
+BEWARE OF:
+ 1) CR characters from windows files! User must remove these
+ 2) Extra white lines or LF at the end of any of the files. The program
+ 	will interepet thse as extra row / columns of a domain or context
+ 3) FIMI indexing always start at 0, as described above.
+ 4) To specify a context in the input file, the same domain names specified in the input file
+ 	in the top lines must be used again to specify the context.
+ 5) The order of the domains when specifying a context matters (as described above).
+
+ 
+ SAMPLE RUN OF NCLU:
+ 
+ To enumerate all bi-clusters in nums--atts dataset using the expected satisfaction reward function, w = 3, and tiring party goers:
+ 
+ ./bin/ghin -i nums.input -w 3.0 -reward 2 -tiring -o result
+ assuming nums.input is the correct path this will produce files result.concepts and result.concepts.names
+ 
+
