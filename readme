@@ -36,12 +36,12 @@ INPUT FILE FORMAT:
 The input file should follow this strict format:
 <num_domains>
 <num_contexts>
-<name_of_domain_1>
+<name_of_domain_1>;<size_of_domain_1>
 <path_to_name_file_domain_1>
 .
 .
 .
-<name_of_domain_n>
+<name_of_domain_n>;<size_of_domain_n>
 <path_to_name_file_domain_n>
 <name_of_domain_i> -- <name_of_domain_j>
 <path_to_fimi_file_of_context_i_j>
@@ -67,9 +67,9 @@ An example file is displayed below as well!
 EXAMPLE INPUT FILE:
 2
 1
-nums
+nums;10
 /Users/alqadaf/Research/Data/toy/num.names
-atts
+atts;5
 /Users/alqadaf/Research/Data/toy/atts.names
 nums--atts
 /Users/alqadaf/Research/Data/toy/num_atts.fimi

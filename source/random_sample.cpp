@@ -75,7 +75,7 @@ vector<long double> * NClusterRandomSample::GetFreqWeightsStar(RelationGraph *g,
                 if(avgTlength == 0)
                     (*weights)[sObjs->At(i)] = (long double)0.0;
                 else
-                    (*weights)[sObjs->At(i)] = (long double)pow(2.0,avgTlength);
+                    (*weights)[sObjs->At(i)] = (long double)pow((long double)2.0,avgTlength);
                // cout<<"\nadding weight "<<(*weights)[sObjs->At(i)]<<" at loc: "<<sObjs->At(i);
                 sum += (*weights)[sObjs->At(i)];
 

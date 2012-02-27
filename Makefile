@@ -5,7 +5,7 @@ CFLAGS	=	-O3 -g -Wno-deprecated
 INCPATH	=	
 LINK	=	g++
 LFLAGS	=	
-LIBS	=	-L ./libs -lcorelib
+
 
 ####### Directories
 
@@ -14,6 +14,7 @@ SOURCE = source
 HEADER = headers
 DRIVERS = drivers
 BIN = bin
+LIB = libs
 
 OBJECTS = $(OBJ)/Framework.o \
 	       $(OBJ)/Z_Rewards.o \
@@ -25,18 +26,16 @@ OBJECTS = $(OBJ)/Framework.o \
 #driver make programs
 
 MAIN_OBJ = $(OBJ)/ghin.o
-
+LIBS = $(LIB)/libcorelib.a
 
 
 TARGET = $(BIN)/ghin
 
 #targets
-.cpp.o:
-	$(CC) -c $(CFLAGS) -o $@ $<
 
 
 ghin: $(OBJECTS) $(MAIN_OBJ)
-		$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(MAIN_OBJ) $(LIBS)
+		$(LINK) -o $(TARGET) $(OBJECTS) $(MAIN_OBJ) $(LIBS)
 
 
 #install and setup scripts
@@ -52,14 +51,14 @@ clean:
 
 
 $(OBJ)/Framework.o: $(SOURCE)/Framework.cpp
-		$(CC) $(CFLAGS) -c  $(SOURCE)/Framework.cpp -o $@ $(LIBS)
+		$(CC) $(CFLAGS) -c  $(SOURCE)/Framework.cpp -o $@
 $(OBJ)/ghin.o: ghin.cpp
 		$(CC) $(CFLAGS) -c ghin.cpp -o $@ $(LIBS)
 $(OBJ)/Z_Rewards.o: $(SOURCE)/Z_Rewards.cpp
-		$(CC) $(CFLAGS) -c $(SOURCE)/Z_Rewards.cpp -o $@ $(LIBS)
+		$(CC) $(CFLAGS) -c $(SOURCE)/Z_Rewards.cpp -o $@
 $(OBJ)/random_sample.o: $(SOURCE)/random_sample.cpp
-		$(CC) $(CFLAGS) -c $(SOURCE)/random_sample.cpp -o $@ $(LIBS)
+		$(CC) $(CFLAGS) -c $(SOURCE)/random_sample.cpp -o $@
 $(OBJ)/Count_Rewards.o: $(SOURCE)/Count_Rewards.cpp
-		$(CC) $(CFLAGS) -c $(SOURCE)/Count_Rewards.cpp -o $@ $(LIBS)
+		$(CC) $(CFLAGS) -c $(SOURCE)/Count_Rewards.cpp -o $@
 
 
