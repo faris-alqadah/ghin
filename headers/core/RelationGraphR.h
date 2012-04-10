@@ -75,6 +75,9 @@ bool IsEdge(int id1,int id2);
 //! Reutnrs true if cId is a rcontext id in the network, false otherwise
     bool IsRContextId(int cId);
 
+ /*! Return the number of elements in this domain*/
+    int NumObjsInDomain(int dId);
+
 //! Prints the HIN
     void Print();
 

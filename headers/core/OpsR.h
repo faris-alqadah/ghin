@@ -28,6 +28,18 @@ RSet *Intersect(RSet *a, IOSet *b);
 //! Union two RSets by indicies, assumes that the RSets are sorted by index
 RSet *Union(RSet *a, RSet *b);
 
+/*!
+ *
+ * Computes the spearman rank correlation of the two specifed RSets
+ * over the specified idxs. It is assumed that the two RSets both contain
+ * the specified idxs
+ * 
+ * @params a first RSet
+ * @params b second RSet
+ * @params idxs the ids of the idxs to compute the rank correlation over
+ */
+double Spearman_Rank_Correlation(RSet *a, RSet *b,IOSet *idxs );
+
 
 
 

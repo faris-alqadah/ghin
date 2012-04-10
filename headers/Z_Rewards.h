@@ -13,7 +13,7 @@
 #define	Z_REWARDS_H
 
 #include "core.h"
-
+#include "Framework.h"
 
 
 /*!

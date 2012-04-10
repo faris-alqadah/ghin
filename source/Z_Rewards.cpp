@@ -41,7 +41,7 @@ double Exp_Sat_BetaBinomail_Score(NCluster *a, int obj, int domain,double w, Rel
             double expected =  BetaBinomial_Mean(n, alpha,beta);
             double std = BetaBinomial_Dev(n, alpha,beta);
             double ones = tmp->Size();
-            double tfactor = 1.0;///pow(tired[domain][obj],1.5);
+            double tfactor = 1.0;//pow(tired[domain][obj],1.5);//1.0;//pow(tired[domain][obj],1.5);
             double zscore = Z_Score(ones,expected,std);
             double z = tfactor*zscore-w;
             score += z;

@@ -53,6 +53,18 @@ public:
      the ids match, then then RSet is output using the name map, otherwise normal printing
      is performed.
      */
+     //! Print 2 domains of the RSet as a matrix
+    /*!
+
+        @params dId1 id of the first domain
+        @params dId2 id of the second domain
+        @params n1 pointer to namemap associated with first domain
+        @params n2 pointer to name associated with second domain
+     *
+     * Asserts that sets with the given ids do exsist in the NRCluster
+     */
+     void Output_As_Matrix(const int dId1, const int dId2, NameMap *n1, NameMap *n2 );
+
     void Output(ofstream&, vector<NameMap *>&nm);
     //! Resurns n, the number of sets in the n-cluster
     int GetN();

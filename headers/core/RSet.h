@@ -1,5 +1,7 @@
-//! Author: Faris Alqadah
-/*!Class for representing an real-valued object-sets such as tf-idf word sets
+//! Class for representing an real-valued object-sets such as tf-idf word sets
+
+
+/** Class for representing an real-valued object-sets such as tf-idf word sets
  along with their tf-idf value. Since these sets can be sparse (or more accuratley they
  are derived form sparse matrices) an index is maintained. Essentially is an IOSet
  with an added real-valued vector.
@@ -29,6 +31,8 @@ public:
     void Output(ofstream& f);
     //! Prints contents of the RSet as space sperated pairs of names and values to ofstream using namemap to map the integers to names
     void Output(ofstream &f, NameMap *n);
+
+
    //! Adds pair to the end of the RSet, increasing the size of the RSet
     void Add(pair<int,double>);
     //! Make a deep copy of the input RSet and assign it to self
@@ -38,6 +42,8 @@ public:
     pair<int,double> At(int i);
     //! Return an IOSet of all indexes that have values associated with them
     IOSet *GetIdxs();
+    //! Get the sorted ranking of the specified idxs
+  map<int,int> *GetRankIdxs(IOSet *theIdxs);
     //!Returns a subspace of self as indicated by the idxs, assumes idxs is sorted for log linear time perfomance
     RSet* GetSubspace(IOSet *idxs);
     //! Returns index pointers (i.e. actual index not id) to the minimum and maximum element in the subspace specified by idxs, assumes idxs is sorted for linear time performance
@@ -92,6 +98,15 @@ bool RSet_Compare_Sup(IOSet *a, IOSet *b);
 
 //! Compartor function used for IOSets, returns true if the a->GetId() > b->GetId()
 bool RSet_Compare_Id(IOSet *a, IOSet *b);
+
+
+//! Comparison function that compares corresponding index elements values
+class IdxSorter{
+    RSet *theSet;
+public:
+    IdxSorter(RSet *v): theSet(v){}
+    bool operator()(int a, int b){ return  theSet->At(a).second < theSet->At(b).second;  }
+};
 
 
 #endif	/* RSET_H */

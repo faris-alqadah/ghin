@@ -96,6 +96,17 @@ public:
     //! Print the RContext to ofstream as a binary matrix
     void PrintAsMatrix(ofstream&);
 
+       //!Prints  a sub-RContext of the original RContext
+    /*!
+     Constructs a sub RContext based on the objects in the paramaters a and b,
+     \param a set of objects from domain1 that will form the "rows" or first domain of the sub-RContext
+     \param b set of objects from domain2 that will form the "columns" or second domain of the sub-RContext
+     \param dId1 id of the domain from whcih objects in a are derived
+     \param dId2 id of the domain from which objects in b are derived
+     */
+    RContext *PrintSubSpace(IOSet *a, IOSet *b, int dId1, int dId2);
+
+
     //! Resturns a sub-RContext of the original RContext
     /*!
      Constructs a sub RContext based on the objects in the paramaters a and b
